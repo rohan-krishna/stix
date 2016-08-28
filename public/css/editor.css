@@ -1,0 +1,18 @@
+/*
+This is for Editor Area
+*/
+@import 'https://fonts.googleapis.com/css?family=Raleway:300,400,700';
+
+body {
+    font-family: 'Raleway',sans-serif;
+    background: #333;
+}
+ul > li {
+    font-size: 1.52em;
+    font-weight: 300;
+    padding: 0.5em 0;
+    color: #fff;
+}
+strong {
+    font-weight: 700;
+}
