@@ -39,6 +39,10 @@ const app = new Vue({
             this.$http.get('/notebooks/getnotes/' + id).then((response) => {
                 this.$set('notes',response.data);
             });
+        },
+        saveNotes(note)
+        {
+            console.log("Note Saving");
         }
     }
 });
@@ -50,8 +54,8 @@ $(document).ready(function() {
         toolbar: 'undo redo | bold italic | bullist numlist',
         menubar: false,
         statusbar: false,
+        content_css: '/css/tinytweak.css',
         browser_spellcheck: true,
-        content_css: '/css/editor.css',
         plugins: 'autoresize'
     });
 });

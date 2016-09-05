@@ -12,6 +12,10 @@ use stix\Notebook;
 class NoteController extends Controller
 {
     //
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function index()
     {
         return view('notes.index')->with(['notes' => Note::all()]);

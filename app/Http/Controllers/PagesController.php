@@ -11,6 +11,10 @@ use stix\Notebook;
 class PagesController extends Controller
 {
     //
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function dashboard()
     {
         $notes = Note::all();

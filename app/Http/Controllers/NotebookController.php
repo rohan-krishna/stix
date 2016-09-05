@@ -10,6 +10,10 @@ use stix\Http\Requests;
 class NotebookController extends Controller
 {
     //
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function index()
     {
         return view('notebooks.index')->with(['notebooks' => Notebook::all()]);
