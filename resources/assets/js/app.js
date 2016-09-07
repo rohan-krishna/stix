@@ -23,9 +23,9 @@ const app = new Vue({
         notebooks: []
     },
     ready() {
-        this.$http.get('/notebooks/getnotebooks').then((response) => {
+        this.$http.get('notebooks/getnotebooks').then((response) => {
             this.$set('notebooks',response.data);
-            this.$http.get('/notebooks/getnotes/' + this.notebooks[0].id).then((response) => {
+            this.$http.get('notebooks/getnotes/' + this.notebooks[0].id).then((response) => {
                this.$set('notes',response.data);
             });
         });
@@ -36,7 +36,7 @@ const app = new Vue({
     methods: {
         fetchNotes(id)
         {
-            this.$http.get('/notebooks/getnotes/' + id).then((response) => {
+            this.$http.get('notebooks/getnotes/' + id).then((response) => {
                 this.$set('notes',response.data);
             });
         },
