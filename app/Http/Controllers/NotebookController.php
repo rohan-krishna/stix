@@ -19,7 +19,8 @@ class NotebookController extends Controller
 
     public function index()
     {
-        return Notebook::all();
+        $user = Auth::user();
+        return $user->notebooks;
     }
 
     public function store(Request $request)

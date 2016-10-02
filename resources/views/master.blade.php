@@ -7,7 +7,8 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body ng-app="stix">
-<div class="container-fluid">
+<div class="container-fluid" style="padding: 0 !important;">
+	@include('topbar')
     @yield('content')
 </div>
 <script>

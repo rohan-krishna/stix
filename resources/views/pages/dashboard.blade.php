@@ -8,8 +8,7 @@
     @else
     
     <div class="container" ng-cloak>
-        <h3>Stix</h3>
-        <hr>
+        <div layout-padding></div>
         <div layout="row" flex ng-controller="MainController" md-theme="myTheme">
             <md-sidenav 
                 md-component-id="left" 
@@ -20,18 +19,9 @@
                     <div class="md-toolbar-tools">
                         <h2>Notebooks</h2>
                         <span flex></span>
-                        <md-menu>
-                            <md-button class="md-icon-button" aria-label="More" ng-click="createNewNotebook()" md-menu-origin>
-                                <i class="material-icons">add_circle</i>
-                            </md-button>
-                            <md-menu-content width="4">
-                                <md-menu-item>
-                                   <md-button ng-click="createNewNotebook()" class="">
-                                        Create A New Notebook
-                                    </md-button>
-                                </md-menu-item>
-                            </md-menu-content>
-                        </md-menu>
+                        <md-button class="md-icon-button" aria-label="More" ng-click="createNewNotebook()">
+                            <i class="material-icons">add_circle</i>
+                        </md-button>
                     </div>
                 </md-toolbar>
                 <md-content flex layout-padding>
@@ -42,6 +32,10 @@
                             <md-button class="md-icon-button" ng-click="showDeleteDialog($event,notebook,$index)">
                                 <i class="material-icons">delete_forever</i>
                             </md-button>
+                        </md-list-item>
+                        <md-list-item ng-show="notebooks.length == 0">
+                            <p>Oops!No new notebooks here yet.Why not create one?</p>
+                            <md-button ng-click="createNewNotebook()" class="md-icon-button" aria-label="More"><i class="material-icons">add_circle</i></md-button>
                         </md-list-item>
                     </md-list>
                 </md-content>
