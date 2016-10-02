@@ -16,6 +16,17 @@
 			<form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
 			    {{ csrf_field() }}
 			</form>
+			@else
+			<h3>Stix</h3>
+			<span flex></span>
+			<md-button class="md-icon-button" href="{{ url('/login') }}">
+				<i class="material-icons">lock_open</i>
+				<md-tooltip md-direction="bottom">Login</md-tooltip>
+			</md-button>
+			<md-button class="md-icon-button" href="{{ url('/register') }}">
+				<i class="material-icons">assignment_id</i>
+				<md-tooltip md-direction="bottom">Register</md-tooltip>
+			</md-button>
 			@endif
 		</div>
 	</div>
