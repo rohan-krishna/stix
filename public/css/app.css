@@ -5769,4 +5769,7 @@ button.close {
 [v-cloak] {
   display: none; }
 
+.active {
+  background-color: rgba(158, 158, 158, 0.2) !important; }
+
 /*# sourceMappingURL=app.css.map */

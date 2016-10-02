@@ -19,6 +19,7 @@ class CreateNotesTable extends Migration
             $table->binary('body');
             $table->boolean('encrypted');
             $table->integer('notebook_id')->unsigned();
+            $table->integer('user_id')->unsigned();
             $table->timestamps();
         });
     }

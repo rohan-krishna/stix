@@ -13,8 +13,20 @@ require('./bootstrap');
  * the application, or feel free to tweak this setup for your needs.
  */
 
-Vue.component('example', require('./components/Example.vue'));
-Vue.component('note', require('./components/note.vue'));
+Vue.component(
+    'passport-clients',
+    require('./components/passport/Clients.vue')
+);
+
+Vue.component(
+    'passport-authorized-clients',
+    require('./components/passport/AuthorizedClients.vue')
+);
+
+Vue.component(
+    'passport-personal-access-tokens',
+    require('./components/passport/PersonalAccessTokens.vue')
+);
 
 const app = new Vue({
     el: 'body',
@@ -23,39 +35,42 @@ const app = new Vue({
         notebooks: []
     },
     ready() {
-        this.$http.get('notebooks/getnotebooks').then((response) => {
-            this.$set('notebooks',response.data);
-            this.$http.get('notebooks/getnotes/' + this.notebooks[0].id).then((response) => {
-               this.$set('notes',response.data);
-            });
-        });
+        // this.$http.get('notebooks/getnotebooks').then((response) => {
+        //     this.$set('notebooks',response.data);
+        //     this.$http.get('notebooks/getnotes/' + this.notebooks[0].id).then((response) => {
+        //        this.$set('notes',response.data);
+        //     });
+        // });
         // this.$http.get('/notebooks/getnotes/' + ).then((response) => {
         //     this.notes.push(response.data);
         // });
+        this.$http.get('/api/test').then(response => {
+            console.log(response.data);
+        });
     },
     methods: {
-        fetchNotes(id)
-        {
-            this.$http.get('notebooks/getnotes/' + id).then((response) => {
-                this.$set('notes',response.data);
-            });
-        },
-        saveNotes(note)
-        {
-            console.log("Note Saving");
-        }
+        // fetchNotes(id)
+        // {
+        //     this.$http.get('notebooks/getnotes/' + id).then((response) => {
+        //         this.$set('notes',response.data);
+        //     });
+        // },
+        // saveNotes(note)
+        // {
+        //     console.log("Note Saving");
+        // }
     }
 });
 
 $(document).ready(function() {
     console.log("jQuery says hello!");
-    tinymce.init({
-        selector: '#tiny-body',
-        toolbar: 'undo redo | bold italic | bullist numlist',
-        menubar: false,
-        statusbar: false,
-        content_css: '/css/tinytweak.css',
-        browser_spellcheck: true,
-        plugins: 'autoresize'
-    });
+    // tinymce.init({
+    //     selector: '#tiny-body',
+    //     toolbar: 'undo redo | bold italic | bullist numlist',
+    //     menubar: false,
+    //     statusbar: false,
+    //     content_css: '/css/tinytweak.css',
+    //     browser_spellcheck: true,
+    //     plugins: 'autoresize'
+    // });
 });

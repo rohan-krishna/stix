@@ -18,7 +18,7 @@ class NoteController extends Controller
     }
     public function index()
     {
-        return view('notes.index')->with(['notes' => Note::all()]);
+        return Note::all();
     }
 
     public function create($id)

@@ -16,6 +16,7 @@ class AddForeignKeyToNotesTable extends Migration
         Schema::table('notes', function (Blueprint $table) {
             //
             $table->foreign('notebook_id')->references('id')->on('notebooks');
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 

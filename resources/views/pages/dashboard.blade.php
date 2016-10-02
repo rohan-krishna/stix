@@ -1,50 +1,60 @@
 @extends('master')
 
 @section('content')
-
-    <div class="container" v-cloak>
-        <div class="row">
-            <div class="col-md-12">
-                <div class="col-md-4">
-                    <h3>Notebooks</h3>
-                    <hr>
-                    <a href="{{ url('notebooks/create') }}" class="btn btn-success btn-block" v-if="notebooks.length == 0">Create A New Notebook</a>
-                    <p>
-                        <a href="#" class="btn btn-success btn-block" data-toggle="modal" data-target=".bs-example-modal-lg">Create A New Notebook</a>
-                    </p>
-                    @include('pages.modals')
-                    <div class="panel panel-success" v-for="notebook in notebooks">
-                        <div class="panel-heading">
-                            <h3 class="panel-title">@{{ notebook.title }}</h3>
-                        </div>
-                        <div class="panel-body">
-                            <button class="btn btn-success btn-block" @click="fetchNotes(notebook.id)">Fetch Notes</button>
-                            <a class="btn btn-warning btn-block" href="{{ url('notes/create') }}/@{{ notebook.id }}">Create A New Note</a>
-                            <hr>
-                            <p>
-                            <form action="{{ url('notebooks') }}/@{{ notebook.id }}" method="post">
-                                {{ csrf_field() }}
-                                {{ method_field('DELETE') }}
-                                <button type="submit" class="btn btn-danger btn-block">Delete Notebook</button>
-                            </form>
-                            </p>
-                        </div>
+    @if(Auth::guest())
+        <div class="container">
+            <h3>Hi there!</h3>
+        </div>
+    @else
+    
+    <div class="container" ng-cloak>
+        <h3>Stix</h3>
+        <hr>
+        <div layout="row" flex ng-controller="MainController" md-theme="myTheme">
+            <md-sidenav 
+                md-component-id="left" 
+                md-whiteframe="4"
+                md-is-locked-open="$mdMedia('gt-md')"
+                class="md-sidenv-left">
+                <md-toolbar class="md-primary">
+                    <div class="md-toolbar-tools">
+                        <h2>Notebooks</h2>
+                        <span flex></span>
+                        <md-menu>
+                            <md-button class="md-icon-button" aria-label="More" ng-click="createNewNotebook()" md-menu-origin>
+                                <i class="material-icons">add_circle</i>
+                            </md-button>
+                            <md-menu-content width="4">
+                                <md-menu-item>
+                                   <md-button ng-click="createNewNotebook()" class="">
+                                        Create A New Notebook
+                                    </md-button>
+                                </md-menu-item>
+                            </md-menu-content>
+                        </md-menu>
                     </div>
-                </div>
-                <div class="col-md-8">
-                    <h3>Notes</h3>
-                    <hr>
-                    <div class="alert alert-danger" role="alert" v-if="notes.length == 0">Oh Snaps! No notes yet. Why not write one?</div>
-                    <div class="list-group">
-                        <a href="{{ url('notes') }}/@{{ note.id }}" class="list-group-item" v-for="note in notes">
-                            <h4 class="list-group-item-heading">@{{ note.title }}</h4>
-                            <span class="label label-success">Created At : @{{ note.created_at }}</span>
-                            <span class="label label-warning">Updated At : @{{ note.updated_at }}</span>
-                        </a>
-                    </div>
-                </div>
+                </md-toolbar>
+                <md-content flex layout-padding>
+                    <md-list>
+                        <md-list-item flex ng-repeat="notebook in notebooks" ng-click="selectNotebook(notebook.slug)" ng-class="{ 'active' : activeNotebook.id == notebook.id }">
+                            @{{ notebook.title }}
+                            <span flex></span>
+                            <md-button class="md-icon-button" ng-click="showDeleteDialog($event,notebook,$index)">
+                                <i class="material-icons">delete_forever</i>
+                            </md-button>
+                        </md-list-item>
+                    </md-list>
+                </md-content>
+            </md-sidenav>
+            <md-content flex>
+                <md-toolbar class="md-accent">
+                    <h1 class="md-toolbar-tools">Notes</h1>
+                </md-toolbar>
+            </md-content>
             </div>
         </div>
     </div>
+    
 
+    @endif
 @endsection

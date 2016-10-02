@@ -17,8 +17,6 @@ class PagesController extends Controller
     }
     public function dashboard()
     {
-        $notes = Note::all();
-        $notebooks = Notebook::all();
-        return view('pages.dashboard',compact(['notes','notebooks']));
+        return view('pages.dashboard');
     }
 }

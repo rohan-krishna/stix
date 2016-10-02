@@ -9,28 +9,37 @@
 | by your application. Just tell Laravel the URIs it should respond
 | to using a Closure or controller method. Build something great!
 |
-*/
+ */
+
+use stix\Mail\WelcomeToStix;
 
 Route::get('/', function () {
     return redirect('dashboard');
 });
 
-Route::get('dashboard','PagesController@dashboard');
-
-Route::get('notebooks','NotebookController@index');
-Route::post('notebooks','NotebookController@store');
-Route::delete('notebooks/{id}','NotebookController@destroy');
-
-// Dashboard API Routes - Not so clean but works for now
-Route::get('notebooks/getnotes/{id}','NoteController@getNotes');
-Route::get('notebooks/getnotebooks','NotebookController@getNotebooks');
-
-//Route::resource('notes','NoteController');
-Route::get('notes/create/{id}','NoteController@create');
-Route::post('notes','NoteController@store');
-Route::get('notes/{id}','NoteController@show');
-Route::patch('notes/{id}','NoteController@update');
 Auth::routes();
 
-Route::get('/home', 'HomeController@index');
+// Dashboard
+Route::get('dashboard', 'PagesController@dashboard');
 
+// View Routes for Notebooks
+Route::get('notebooks','NotebookController@index');
+Route::get('notebooks/{slug}','NotebookController@showWithView');
+
+// API Routes
+Route::group(['prefix' => 'api','middleware' => 'auth'], function () {
+    Route::resource('notebooks', 'NotebookController');
+    Route::resource('notes', 'NoteController');
+});
+
+
+
+// Passport Testing
+Route::get('passport',function() {
+	return view('pages.passport');
+});
+
+// Mailables testing
+Route::get('sendmail', function() {
+	Mail::to('rohan@example.com')->send(new WelcomeToStix);
+});
